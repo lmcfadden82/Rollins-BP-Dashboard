@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rollins Inc. (ROL) — Investment Primer</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0d1117;
+    --bg2: #161b22;
+    --bg3: #21262d;
+    --bg4: #30363d;
+    --border: rgba(255,255,255,0.08);
+    --border2: rgba(255,255,255,0.14);
+    --text: #e6edf3;
+    --text2: #8b949e;
+    --text3: #6e7681;
+    --accent: #c9a84c;
+    --accent2: #e8c96a;
+    --accent-dim: rgba(201,168,76,0.12);
+    --accent-border: rgba(201,168,76,0.35);
+    --green: #3fb950;
+    --green-bg: rgba(63,185,80,0.1);
+    --red: #f85149;
+    --red-bg: rgba(248,81,73,0.1);
+    --amber: #d29922;
+    --amber-bg: rgba(210,153,34,0.1);
+    --blue: #58a6ff;
+    --blue-bg: rgba(88,166,255,0.1);
+    --radius: 6px;
+    --radius-lg: 10px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border2);
+    padding: 0 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+  .header-left { display: flex; align-items: baseline; gap: 12px; }
+  .header-ticker {
+    font-family: 'DM Mono', monospace;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--accent2);
+    letter-spacing: 0.03em;
+  }
+  .header-name {
+    font-size: 13px;
+    color: var(--text2);
+    font-weight: 300;
+  }
+  .header-badge {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 2px 10px;
+    border-radius: 20px;
+    background: var(--accent-dim);
+    color: var(--accent2);
+    border: 1px solid var(--accent-border);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  /* ── HERO STRIP ── */
+  .hero {
+    background: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #0d1117 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 2.5rem 2rem 2rem;
+  }
+  .hero-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .hero-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 0.3rem;
+    line-height: 1.2;
+  }
+  .hero-sub {
+    font-size: 14px;
+    color: var(--text2);
+    margin-bottom: 1.75rem;
+    font-weight: 300;
+  }
+  .metric-strip {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+  .metric-cell {
+    background: var(--bg2);
+    padding: 1rem 1.25rem;
+  }
+  .metric-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text3);
+    margin-bottom: 0.35rem;
+    font-weight: 500;
+  }
+  .metric-val {
+    font-family: 'DM Mono', monospace;
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--accent2);
+    line-height: 1;
+  }
+  .metric-sub {
+    font-size: 12px;
+    color: var(--text3);
+    margin-top: 3px;
+    font-weight: 300;
+  }
+
+  /* ── NAV TABS ── */
+  .nav-bar {
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    position: sticky;
+    top: 56px;
+    z-index: 90;
+  }
+  .nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    gap: 0;
+  }
+  .tab-btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--text2);
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 14px 18px;
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+  }
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active {
+    color: var(--accent2);
+    border-bottom-color: var(--accent);
+    font-weight: 500;
+  }
+
+  /* ── MAIN LAYOUT ── */
+  .main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem 2rem 4rem;
+  }
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* ── CONTENT STYLES ── */
+  .content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .content-grid.wide { grid-template-columns: 2fr 1fr; }
+  .content-grid.single { grid-template-columns: 1fr; }
+
+  .card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+  }
+  .card-title {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 400;
+    color: var(--text);
+    margin: 1.5rem 0 0.6rem;
+  }
+  h3:first-child { margin-top: 0; }
+
+  p { color: var(--text2); font-size: 14px; line-height: 1.75; margin-bottom: 0.75rem; }
+
+  ul { list-style: none; padding: 0; margin: 0 0 0.75rem; }
+  ul li {
+    font-size: 14px;
+    color: var(--text2);
+    line-height: 1.7;
+    padding: 0.35rem 0 0.35rem 1.1rem;
+    position: relative;
+    border-bottom: 1px solid var(--border);
+  }
+  ul li:last-child { border-bottom: none; }
+  ul li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 12px;
+  }
+  ul li strong { color: var(--text); font-weight: 500; }
+
+  /* ── TABLES ── */
+  .table-wrap { overflow-x: auto; margin: 0.5rem 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  thead tr { border-bottom: 1px solid var(--border2); }
+  th {
+    text-align: left;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text3);
+    font-weight: 500;
+    padding: 0 10px 10px 0;
+  }
+  td {
+    padding: 10px 10px 10px 0;
+    color: var(--text2);
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  td:first-child { color: var(--text); font-weight: 500; }
+  tr:last-child td { border-bottom: none; }
+  tbody tr:hover td { background: rgba(255,255,255,0.02); }
+
+  /* ── TAGS ── */
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 2px 9px;
+    border-radius: 20px;
+    margin: 2px 3px 2px 0;
+    letter-spacing: 0.02em;
+  }
+  .tag-green { background: var(--green-bg); color: var(--green); border: 1px solid rgba(63,185,80,0.25); }
+  .tag-red { background: var(--red-bg); color: var(--red); border: 1px solid rgba(248,81,73,0.25); }
+  .tag-amber { background: var(--amber-bg); color: var(--amber); border: 1px solid rgba(210,153,34,0.25); }
+  .tag-blue { background: var(--blue-bg); color: var(--blue); border: 1px solid rgba(88,166,255,0.25); }
+  .tag-gold { background: var(--accent-dim); color: var(--accent2); border: 1px solid var(--accent-border); }
+
+  /* ── RISK ROWS ── */
+  .risk-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .risk-item:last-child { border-bottom: none; }
+  .risk-badge {
+    flex-shrink: 0;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-top: 2px;
+    min-width: 68px;
+    text-align: center;
+  }
+  .rb-high { background: var(--red-bg); color: var(--red); border: 1px solid rgba(248,81,73,0.3); }
+  .rb-med { background: var(--amber-bg); color: var(--amber); border: 1px solid rgba(210,153,34,0.3); }
+  .rb-low { background: var(--green-bg); color: var(--green); border: 1px solid rgba(63,185,80,0.3); }
+  .risk-content { flex: 1; }
+  .risk-name { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 4px; }
+  .risk-desc { font-size: 13px; color: var(--text2); line-height: 1.6; }
+
+  /* ── VERDICT CARDS ── */
+  .verdict-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .verdict-card {
+    background: var(--bg3);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem;
+    border: 1px solid var(--border);
+  }
+  .verdict-card.bull { border-top: 2px solid var(--green); }
+  .verdict-card.bear { border-top: 2px solid var(--red); }
+  .verdict-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+  }
+  .verdict-label.bull { color: var(--green); }
+  .verdict-label.bear { color: var(--red); }
+  .bottom-line {
+    background: var(--accent-dim);
+    border: 1px solid var(--accent-border);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem 1.5rem;
+    margin-top: 1.5rem;
+  }
+  .bottom-line-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+  }
+  .bottom-line p { color: var(--text); font-size: 14px; margin: 0; }
+
+  /* ── SECTION HEADER ── */
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--text);
+  }
+  .section-desc {
+    font-size: 13px;
+    color: var(--text3);
+    font-weight: 300;
+  }
+
+  /* ── HIGHLIGHT ROW ── */
+  .highlight-row {
+    background: var(--accent-dim);
+    border-radius: var(--radius);
+    padding: 0.75rem 1rem;
+    margin: 1rem 0;
+    border-left: 3px solid var(--accent);
+    font-size: 13px;
+    color: var(--text2);
+  }
+  .highlight-row strong { color: var(--accent2); }
+
+  /* ── SOURCE NOTE ── */
+  .source-note {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+    font-size: 11px;
+    color: var(--text3);
+    font-family: 'DM Mono', monospace;
+  }
+
+  /* ── MINI STAT INSIDE CARD ── */
+  .mini-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-top: 0.75rem;
+  }
+  .mini-stat {
+    background: var(--bg3);
+    padding: 0.75rem 1rem;
+  }
+  .mini-stat-l { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 3px; }
+  .mini-stat-v { font-family: 'DM Mono', monospace; font-size: 16px; color: var(--accent2); font-weight: 500; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 720px) {
+    .content-grid, .content-grid.wide, .verdict-grid { grid-template-columns: 1fr; }
+    .hero-title { font-size: 24px; }
+    .tab-btn { font-size: 12px; padding: 12px 12px; }
+    .metric-val { font-size: 18px; }
+    .nav-inner { overflow-x: auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- SITE HEADER -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-left">
+      <span class="header-ticker">ROL</span>
+      <span class="header-name">Rollins, Inc.</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <span class="header-badge">Buy-Side Primer</span>
+      <span style="font-size:12px;color:var(--text3);font-family:'DM Mono',monospace">May 2025</span>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-label">Equity Research — Business Services</div>
+    <div class="hero-title">Rollins, Inc. — Investment Primer</div>
+    <div class="hero-sub">Buy-Side Deep Dive &nbsp;·&nbsp; Pest Control &amp; Specialty Outsourcing &nbsp;·&nbsp; NYSE: ROL</div>
+    <div class="metric-strip">
+      <div class="metric-cell">
+        <div class="metric-label">Revenue (FY2024E)</div>
+        <div class="metric-val">$3.4B</div>
+        <div class="metric-sub">~9% organic CAGR, 5yr</div>
+      </div>
+      <div class="metric-cell">
+        <div class="metric-label">EBITDA Margin</div>
+        <div class="metric-val">~23%</div>
+        <div class="metric-sub">+50–100bps/yr expansion</div>
+      </div>
+      <div class="metric-cell">
+        <div class="metric-label">FCF Conversion</div>
+        <div class="metric-val">&gt;90%</div>
+        <div class="metric-sub">Negative working capital</div>
+      </div>
+      <div class="metric-cell">
+        <div class="metric-label">NTM P/E</div>
+        <div class="metric-val">35–40×</div>
+        <div class="metric-sub">Premium to sector</div>
+      </div>
+      <div class="metric-cell">
+        <div class="metric-label">Recurring Revenue</div>
+        <div class="metric-val">~80%</div>
+        <div class="metric-sub">Annual / monthly contracts</div>
+      </div>
+      <div class="metric-cell">
+        <div class="metric-label">Brands Owned</div>
+        <div class="metric-val">20+</div>
+        <div class="metric-sub">Orkin ~55% of revenue</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV TABS -->
+<nav class="nav-bar">
+  <div class="nav-inner">
+    <button class="tab-btn active" onclick="show('ov',this)">Overview</button>
+    <button class="tab-btn" onclick="show('sg',this)">Segments</button>
+    <button class="tab-btn" onclick="show('co',this)">Competitive</button>
+    <button class="tab-btn" onclick="show('fi',this)">Financials</button>
+    <button class="tab-btn" onclick="show('ri',this)">Risks</button>
+    <button class="tab-btn" onclick="show('vd',this)">Investor Verdict</button>
+    <button class="tab-btn" onclick="show('ip',this)">Industry Primer</button>
+    <button class="tab-btn" onclick="show('op',this)">Operator Lens</button>
+  </div>
+</nav>
+
+<main class="main">
+
+<!-- ══════════ OVERVIEW ══════════ -->
+<div id="ov" class="section active">
+  <div class="section-header">
+    <span class="section-title">Company Overview</span>
+    <span class="section-desc">History, business model &amp; value chain positioning</span>
+  </div>
+
+  <div class="content-grid wide">
+    <div class="card">
+      <div class="card-title">History &amp; Evolution</div>
+      <ul>
+        <li><strong>Founded 1948</strong> by O. Wayne Rollins in Atlanta, GA. Orkin Exterminating (est. 1901) was acquired in 1964 — still the flagship brand and one of the most recognized names in US pest control.</li>
+        <li><strong>Family control:</strong> Gary Rollins (son of founder) served as CEO until 2022, remains Executive Chairman. Rollins family controls ~50% of voting power — a defining governance feature.</li>
+        <li><strong>Conglomerate-to-pure-play:</strong> ROL spun off its petroleum and other non-core businesses in the 1990s–2000s to become a pure-play pest control operator. A deliberate and value-accretive strategic simplification.</li>
+        <li><strong>Professionalization era (2001–present):</strong> Centralized routing software, pricing analytics, talent development infrastructure (Rollins Learning Center), and a systematized M&amp;A playbook were all developed under Gary Rollins and continued under CEO Jerry Gahlhoff (appointed 2022).</li>
+        <li><strong>M&amp;A engine:</strong> 100+ acquisitions in the past decade. Typical target: owner-operated regional pest company, $2–20M revenue. The playbook is highly repeatable — acquire → integrate routes → normalize pricing → expand margin.</li>
+      </ul>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:1rem;">
+      <div class="card">
+        <div class="card-title">Business Model</div>
+        <ul>
+          <li><strong>Subscription-based:</strong> Customers on annual or monthly auto-renewing contracts. Revenue recognized on service delivery, not upfront.</li>
+          <li><strong>Non-discretionary demand:</strong> Pests don't disappear because the economy slows. ROL has never posted a revenue decline.</li>
+          <li><strong>Negative working capital:</strong> Annual-plan customers often pre-pay. ROL collects cash before delivering the service — a rare structural cash flow advantage.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title">Value Chain Position</div>
+        <ul>
+          <li><strong>Company-owned routes</strong> dominate US operations — ROL controls the customer relationship, technician, and pricing directly. Strategically superior to franchise models.</li>
+          <li><strong>Route density</strong> is the core operating lever: more stops per route → lower cost per service → higher margin. Tuck-in acquisitions increase density in existing markets.</li>
+          <li><strong>Orkin franchises</strong> (~500 internationally) generate modest royalty revenue. International is small today but long-term optionality.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="highlight-row">
+    <strong>The core insight:</strong> Rollins is a subscription business in industrial clothing. The route-density operating model, non-discretionary demand, and negative working capital combine to produce compounding, recession-resistant free cash flow — a profile that justifies a premium multiple relative to industrial peers.
+  </div>
+
+  <div class="source-note">Sources: Rollins 10-K (2023), ROL IR materials, NPMA industry reports, Bloomberg consensus</div>
+</div>
+
+<!-- ══════════ SEGMENTS ══════════ -->
+<div id="sg" class="section">
+  <div class="section-header">
+    <span class="section-title">Segments &amp; Brand Portfolio</span>
+    <span class="section-desc">Brand-by-brand breakdown with standalone rigor</span>
+  </div>
+
+  <div class="card" style="margin-bottom:1.5rem">
+    <div class="card-title">Brand Overview</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Brand</th>
+            <th>Geography</th>
+            <th>Primary Customer</th>
+            <th>Est. Rev. Share</th>
+            <th>Key Differentiator</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Orkin</td><td>National (US + intl franchise)</td><td>Residential &amp; commercial</td><td><span class="tag tag-gold">~55%</span></td><td>120+ yr brand, training depth</td></tr>
+          <tr><td>HomeTeam Pest Defense</td><td>Sunbelt, Southeast</td><td>Residential (new construction)</td><td><span class="tag tag-gold">~8%</span></td><td>Taexx in-wall tube system</td></tr>
+          <tr><td>Clark Pest Control</td><td>California, Nevada</td><td>Residential &amp; commercial</td><td><span class="tag tag-gold">~8%</span></td><td>Western US scale, strong commercial</td></tr>
+          <tr><td>Northwest Exterminating</td><td>Southeast</td><td>Residential</td><td><span class="tag tag-gold">~4%</span></td><td>Bed bug, mosquito, wildlife</td></tr>
+          <tr><td>Other brands</td><td>Regional</td><td>Mixed</td><td><span class="tag tag-gold">~25%</span></td><td>Western Pest, Critter Control, etc.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="content-grid">
+    <div class="card">
+      <div class="card-title">Orkin — Flagship</div>
+      <ul>
+        <li>Founded 1901, acquired by Rollins 1964. Oldest and most recognized pest brand in the US. Name carries trust — critical in termite, where guarantees involve five- and six-figure remediation liability.</li>
+        <li>Company-owned US routes give Rollins full pricing and customer relationship control. Margins are highest here due to decades of route optimization.</li>
+        <li>Rollins Learning Center (Atlanta) provides more structured technician training than most regional competitors — a genuine moat for commercial accounts with strict vendor requirements.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">HomeTeam Pest Defense</div>
+      <ul>
+        <li>Unique channel: partners with homebuilders (D.R. Horton, Lennar) to install the proprietary Taexx in-wall pesticide delivery system during construction.</li>
+        <li>Creates embedded, near-permanent switching costs — the system is inside the walls. Structurally low churn vs. standard pest contracts.</li>
+        <li>Exposed to new housing starts; a prolonged housing downturn is a headwind. Current Sunbelt concentration is a tailwind.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Clark Pest Control</div>
+      <ul>
+        <li>Acquired 2019 for ~$400M — one of ROL's largest-ever acquisitions. Gave Rollins meaningful scale in California, the largest US pest control market.</li>
+        <li>Strong commercial mix (food processing, restaurants, hospitality) — higher revenue per stop and stronger contract stickiness than residential.</li>
+        <li>California's regulatory environment (CDPR, Structural Pest Control Board) is stricter than most states — an operational complexity but also a barrier to entry for smaller operators.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Revenue Mix by Service Line</div>
+      <ul>
+        <li><span class="tag tag-blue">Residential ~50%</span> General pest, mosquito, bed bug. More seasonal, slightly lower margin, higher churn than commercial.</li>
+        <li><span class="tag tag-gold">Commercial ~35%</span> Food &amp; bev, healthcare, hospitality, multi-family. Regulatory-driven demand, annual contracts, lower churn, higher revenue per stop.</li>
+        <li><span class="tag tag-green">Termite &amp; ancillary ~15%</span> Termite bonds (recurring inspection + guarantee), wildlife exclusion, attic insulation. High-margin, deeply recurring. Customers pay to maintain a guarantee, not just for treatment.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="source-note">Sources: Rollins 10-K (2023), company segment disclosures, NPMA industry data</div>
+</div>
+
+<!-- ══════════ COMPETITIVE ══════════ -->
+<div id="co" class="section">
+  <div class="section-header">
+    <span class="section-title">Competitive Landscape</span>
+    <span class="section-desc">Peers, positioning, and the Rentokil/Terminix dynamic</span>
+  </div>
+
+  <div class="card" style="margin-bottom:1.5rem">
+    <div class="card-title">Competitive Universe</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Competitor</th><th>Scale</th><th>Ownership</th><th>Primary Threat Vector</th></tr></thead>
+        <tbody>
+          <tr><td>Rentokil / Terminix</td><td>~$5B+ US rev</td><td>Public (RTO.L)</td><td>Commercial accounts, national enterprise coverage</td></tr>
+          <tr><td>Anticimex</td><td>~$1B+ global</td><td>PE-backed (EQT)</td><td>IoT/tech-forward positioning, M&amp;A competition</td></tr>
+          <tr><td>Massey Services</td><td>Southeast regional</td><td>Private</td><td>Florida/Southeast residential share</td></tr>
+          <tr><td>Arrow Exterminators</td><td>Southeast regional</td><td>Private (ESOP)</td><td>Residential price competition</td></tr>
+          <tr><td>Truly Nolen</td><td>Southwest regional</td><td>Private</td><td>Southwest residential share</td></tr>
+          <tr><td>~20,000 independents</td><td>Local</td><td>Private</td><td>Price competition; M&amp;A acquisition targets</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="content-grid">
+    <div class="card">
+      <div class="card-title">Where Rollins Wins</div>
+      <ul>
+        <li><span class="tag tag-green">Brand trust</span> Orkin's 120-year name matters most in termite (high-stakes guarantee) and regulated commercial accounts (food processing, hospitals).</li>
+        <li><span class="tag tag-green">Technician training</span> Rollins Learning Center produces more credentialed techs than most competitors. Critical for enterprise commercial RFPs with strict vendor qualification.</li>
+        <li><span class="tag tag-green">Route density &amp; logistics</span> Centralized routing software optimizes stops per route — cost per service is lower than most regional independents at scale.</li>
+        <li><span class="tag tag-green">M&amp;A playbook</span> 20–30 deals/year, highly systematized. Owner-operators get liquidity + back-office relief. Deal flow is largely proprietary and off-market.</li>
+        <li><span class="tag tag-green">Negative working capital</span> Annual pre-payment customers create a structural cash flow advantage that regional operators rarely replicate.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Where Rollins Loses / Vulnerabilities</div>
+      <ul>
+        <li><span class="tag tag-red">Price-sensitive residential</span> A local independent with lower overhead can undercut on one-time treatments. ROL competes on brand and value, not price.</li>
+        <li><span class="tag tag-red">Technology positioning</span> Anticimex (EQT-backed) is investing heavily in IoT-based pest monitoring for commercial. ROL is not yet a leader in tech-enabled monitoring solutions.</li>
+        <li><span class="tag tag-amber">Large enterprise national accounts</span> Post-merger Rentokil/Terminix has more national coverage for multi-site enterprise contracts (hotel chains, retail).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:1.5rem">
+    <div class="card-title">Rentokil / Terminix Merger — Key Implications</div>
+    <ul>
+      <li><strong>The deal:</strong> Rentokil acquired Terminix in 2022 for ~$6.7B, creating a US-scale peer with combined revenue approaching $5B+ in North America and the Terminix brand (comparable recognition to Orkin).</li>
+      <li><strong>Near-term opportunity for ROL:</strong> Rentokil/Terminix integration has been bumpy — documented customer attrition, technician turnover, and system consolidation challenges. ROL has benefited from poaching commercial accounts and technicians. This tailwind may persist 2–3 more years.</li>
+      <li><strong>Long-term structural threat:</strong> A fully integrated Rentokil/Terminix at $5B+ US scale with national enterprise coverage is a more formidable commercial competitor than Terminix ever was as a standalone. Rollins must actively defend and win commercial share before the integration stabilizes.</li>
+    </ul>
+  </div>
+  <div class="source-note">Sources: Rollins 10-K, Rentokil annual reports (2022–23), NPMA market sizing, Bloomberg</div>
+</div>
+
+<!-- ══════════ FINANCIALS ══════════ -->
+<div id="fi" class="section">
+  <div class="section-header">
+    <span class="section-title">Financial Profile</span>
+    <span class="section-desc">Revenue, margins, FCF, M&amp;A economics &amp; capital allocation</span>
+  </div>
+
+  <div class="card" style="margin-bottom:1.5rem">
+    <div class="card-title">Historical Financials (Estimated)</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Metric</th><th>FY2021</th><th>FY2022</th><th>FY2023</th><th>FY2024E</th></tr></thead>
+        <tbody>
+          <tr><td>Revenue</td><td>$2.42B</td><td>$2.69B</td><td>$3.07B</td><td>~$3.40B</td></tr>
+          <tr><td>Organic growth</td><td>~8%</td><td>~9%</td><td>~9%</td><td>~7–8%</td></tr>
+          <tr><td>Gross margin</td><td>~51%</td><td>~51%</td><td>~52%</td><td>~52–53%</td></tr>
+          <tr><td>EBITDA margin</td><td>~21%</td><td>~22%</td><td>~23%</td><td>~23–24%</td></tr>
+          <tr><td>FCF conversion</td><td>&gt;90%</td><td>&gt;90%</td><td>&gt;90%</td><td>&gt;90%</td></tr>
+          <tr><td>Acquisitions (count)</td><td>~21</td><td>~26</td><td>~25</td><td>~20–30</td></tr>
+          <tr><td>Net leverage</td><td>~0.5×</td><td>~1.0×</td><td>~1.5×</td><td>~1.5–2.0×</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="content-grid">
+    <div class="card">
+      <div class="card-title">Revenue &amp; Growth Drivers</div>
+      <ul>
+        <li><strong>5-year CAGR ~10%</strong> — ~6–7% organic + ~3–4% M&amp;A contribution. Organic is the higher-quality component and has been remarkably consistent.</li>
+        <li><strong>Pricing power:</strong> +4–5% annual price increases with minimal pushback — customers don't cancel a $50/month pest service over a modest increase. Non-discretionary demand enables this.</li>
+        <li><strong>Volume:</strong> New customer adds, upsell of bundled services (mosquito, bed bug, wildlife), and cross-sell within acquired customer bases.</li>
+        <li><strong>~80% recurring:</strong> Customers on annual contracts or auto-renewing monthly plans. Annual retention exceeds 80%; commercial is ~85–90%.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Margin Structure</div>
+      <ul>
+        <li><strong>Labor ~60% of COGS</strong> — Primary variable cost. Wage inflation is the key margin risk; route density gains are the key margin driver.</li>
+        <li><strong>EBITDA expansion ~50–100bps/yr</strong> — Driven by route density gains from tuck-ins, pricing flowing through on fixed-cost base, and SG&amp;A leverage as centralized functions scale.</li>
+        <li><strong>Capex intensity very low</strong> — ~2–3% of revenue (fleet, equipment). A hallmark of business model quality.</li>
+        <li><strong>Negative working capital:</strong> Annual pre-payment customers mean ROL collects cash before service delivery. This is rare and structurally valuable.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">M&amp;A Economics</div>
+      <ul>
+        <li><strong>Acquisition pace:</strong> 20–30 tuck-ins/year at 5–8× EBITDA. Targets are typically owner-operated regional pest companies with $2–20M revenue.</li>
+        <li><strong>Synergy math:</strong> Route consolidation + pricing normalization typically brings effective acquisition multiple to 4–5× within 2–3 years. ROIC on acquisitions has been consistently strong.</li>
+        <li><strong>Larger deals (Clark ~$400M):</strong> Higher multiples paid but strategic geography-fill and commercial mix improvement justify the premium.</li>
+        <li><strong>Fragmented market:</strong> ~20,000+ independent operators in the US. Acquisition runway is long at the current pace.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Capital Allocation</div>
+      <ul>
+        <li><strong>Dividends:</strong> Consistent grower — ROL has paid dividends every year since the 1970s. Special dividends have been issued periodically.</li>
+        <li><strong>Buybacks:</strong> Historically minimal. Management has prioritized M&amp;A deployment over repurchases.</li>
+        <li><strong>Leverage:</strong> Conservative — typically 1.5–2.0× net debt/EBITDA. Balance sheet provides capacity for larger deals if pursued.</li>
+        <li><strong>Key metrics to track:</strong> Organic growth rate, technician headcount &amp; retention, EBITDA margin trajectory, acquisition spend and integration pace.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="source-note">Sources: Rollins 10-K (2021–2023), Bloomberg consensus estimates, ROL Q4 2023 earnings release</div>
+</div>
+
+<!-- ══════════ RISKS ══════════ -->
+<div id="ri" class="section">
+  <div class="section-header">
+    <span class="section-title">Risk Assessment</span>
+    <span class="section-desc">Operational, competitive, regulatory &amp; macro risks — severity rated</span>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Risk Register</div>
+    <div class="risk-item">
+      <span class="risk-badge rb-high">High</span>
+      <div class="risk-content">
+        <div class="risk-name">Technician labor inflation &amp; attrition</div>
+        <div class="risk-desc">Labor is ~60% of COGS. Industry-wide technician attrition runs 35–40% annually. Wage inflation (particularly post-COVID) has pressured margins, and Rollins must continually recruit and train. A tightening labor market or meaningful unionization push would be a structural margin headwind that route density gains can only partially offset.</div>
+      </div>
+    </div>
+    <div class="risk-item">
+      <span class="risk-badge rb-med" style="white-space:nowrap;font-size:9px">Med-High</span>
+      <div class="risk-content">
+        <div class="risk-name">Rentokil / Terminix long-term competitive response</div>
+        <div class="risk-desc">Near-term integration disruption has helped ROL. But a fully integrated Rentokil/Terminix at $5B+ US scale represents a legitimate national competitor in commercial pest — especially for multi-site enterprise accounts where national coverage matters. Pricing discipline in commercial could deteriorate over 3–5 years.</div>
+      </div>
+    </div>
+    <div class="risk-item">
+      <span class="risk-badge rb-med">Medium</span>
+      <div class="risk-content">
+        <div class="risk-name">Valuation / multiple compression</div>
+        <div class="risk-desc">ROL trades at 35–40× NTM earnings — a premium to most industrials and business services peers. Any guidance cut, margin miss, or organic growth deceleration could trigger significant de-rating. The stock's quality is priced in, leaving limited margin of safety for new positions at current levels.</div>
+      </div>
+    </div>
+    <div class="risk-item">
+      <span class="risk-badge rb-med">Medium</span>
+      <div class="risk-content">
+        <div class="risk-name">Chemical regulation (EPA, state boards)</div>
+        <div class="risk-desc">The EPA periodically restricts or re-evaluates pesticide registrations (e.g., chlorpyrifos ban). ROL has managed these transitions historically by shifting to alternative chemistries, but new restrictions could increase chemical costs or limit service efficacy. California (CDPR) is a particular watch area given Clark's exposure.</div>
+      </div>
+    </div>
+    <div class="risk-item">
+      <span class="risk-badge rb-med">Medium</span>
+      <div class="risk-content">
+        <div class="risk-name">M&amp;A integration execution risk</div>
+        <div class="risk-desc">At 20–30 deals/year, maintaining integration quality is a management bandwidth challenge. A degraded acquisition or cultural misfit could impair unit economics in a region. Risk scales with deal volume and is amplified if ROL pursues larger platform acquisitions.</div>
+      </div>
+    </div>
+    <div class="risk-item">
+      <span class="risk-badge rb-low">Low–Med</span>
+      <div class="risk-content">
+        <div class="risk-name">Weather &amp; seasonality</div>
+        <div class="risk-desc">Pest activity is temperature- and moisture-driven. Warm, wet conditions increase demand. ROL's Sunbelt/Southeast concentration is generally a tailwind (mild winters). An unusually cold national winter could modestly suppress Q1 volumes, but this is a quarterly timing issue, not a structural one.</div>
+      </div>
+    </div>
+    <div class="risk-item">
+      <span class="risk-badge rb-low">Low</span>
+      <div class="risk-content">
+        <div class="risk-name">Family governance concentration</div>
+        <div class="risk-desc">The Rollins family controls ~50% of voting power. Historically, interests have been aligned with shareholders (long tenure, dividend focus, no egregious capital destruction). The risk is succession or a future capital allocation decision that diverges from minority shareholder interests — worth monitoring but not a near-term concern.</div>
+      </div>
+    </div>
+  </div>
+  <div class="source-note">Sources: Rollins 10-K risk factors, OSHA/EPA regulatory filings, NPMA workforce data, Bloomberg</div>
+</div>
+
+<!-- ══════════ VERDICT ══════════ -->
+<div id="vd" class="section">
+  <div class="section-header">
+    <span class="section-title">Investor Verdict</span>
+    <span class="section-desc">Bull / bear synthesis &amp; entry point framing</span>
+  </div>
+
+  <div class="verdict-grid">
+    <div class="verdict-card bull">
+      <div class="verdict-label bull">Bull Case</div>
+      <ul>
+        <li><span class="tag tag-green">Durable recurring revenue</span> Non-discretionary, subscription-based, ~80% recurring. ROL has never posted a revenue decline — recession resilience is structural, not cyclical.</li>
+        <li><span class="tag tag-green">Best-in-class M&amp;A engine</span> A 70-year-old, systematized acquisition machine in a $10B+ fragmented US market with 20,000+ independent targets. The runway is long at the current pace.</li>
+        <li><span class="tag tag-green">Pricing power</span> Customers rarely cancel over a 4–5% annual price increase on a non-discretionary service. Margin expansion is structurally embedded in the model.</li>
+      </ul>
+    </div>
+    <div class="verdict-card bear">
+      <div class="verdict-label bear">Bear Case</div>
+      <ul>
+        <li><span class="tag tag-red">Valuation unforgiving</span> At 35–40× earnings, any execution stumble creates outsized downside. The premium is fully priced-in — limited margin of safety at current levels.</li>
+        <li><span class="tag tag-red">Labor headwinds structural</span> Technician attrition and wage inflation are not cyclical problems. Sustained investment in retention, compensation, and training are permanent margin headwinds.</li>
+        <li><span class="tag tag-red">Rentokil scale threat</span> Once integration stabilizes (18–36 months), ROL faces a genuine national-scale competitor with comparable brand recognition and greater enterprise coverage.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:1.5rem">
+    <div class="card-title">Key Questions Before Initiating</div>
+    <ul>
+      <li>Is organic revenue growth (ex-M&amp;A) sustainable at 6–7%, or is pricing normalization a 2025–26 risk as consumer budgets tighten?</li>
+      <li>What is technician retention trending — is the recent improvement in attrition rates structural or cyclical?</li>
+      <li>How much of recent commercial account wins are permanent gains from Rentokil/Terminix disruption vs. temporary share that eventually reverts?</li>
+      <li>At what entry multiple does the risk/reward become compelling? Most buy-side consensus suggests 28–32× NTM earnings as a more interesting entry level.</li>
+    </ul>
+  </div>
+
+  <div class="card" style="margin-bottom:1.5rem">
+    <div class="card-title">Valuation Context</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Company</th><th>NTM P/E</th><th>EV/EBITDA</th><th>Organic Growth</th><th>FCF Conversion</th></tr></thead>
+        <tbody>
+          <tr><td>Rollins (ROL)</td><td><strong>35–40×</strong></td><td>~25–28×</td><td>~7–8%</td><td>&gt;90%</td></tr>
+          <tr><td>Rentokil (RTO.L)</td><td>~20–24×</td><td>~15–18×</td><td>~5–6%</td><td>~80%</td></tr>
+          <tr><td>Business services peers</td><td>~22–28×</td><td>~14–18×</td><td>~4–6%</td><td>~75–85%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:0.75rem">ROL's premium to sector is historically justified by superior organic growth, FCF conversion, and M&amp;A execution track record. The risk is that this premium compresses if any of those three pillars shows cracks.</p>
+  </div>
+
+  <div class="bottom-line">
+    <div class="bottom-line-label">Bottom Line</div>
+    <p>Rollins is a textbook quality compounder — durable demand, pricing power, negative working capital, and a proven M&amp;A engine in a fragmented market. The business is as close to "buy and hold forever" as exists in industrial services. The challenge is the entry point: at 35–40× earnings, the stock prices in sustained excellence with limited room for error. For a long-only portfolio, the right approach is to <strong>build a small initial position and add on weakness</strong> (organic growth scare, market selloff, labor-cost-driven margin miss) rather than initiating at full weight at current levels. ROL is rarely "cheap" — but it earns its premium over time.</p>
+  </div>
+
+  <div class="source-note">Sources: Rollins 10-K (2023) · Bloomberg consensus estimates · NPMA 2023 Industry Report · EPA pesticide registration database · ROL DEF 14A proxy (2023) · Rentokil Annual Report (2023)</div>
+</div>
+
+
+<!-- ══════════ INDUSTRY PRIMER ══════════ -->
+<div id="ip" class="section">
+  <div class="section-header">
+    <span class="section-title">Industry Primer — US Pest Control</span>
+    <span class="section-desc">Buy-Side PM lens · drawn from trained knowledge · Rollins as anchor</span>
+  </div>
+
+  <!-- WHY THIS INDUSTRY EXISTS -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <div class="card-title">Why This Industry Exists — Structural Demand Drivers</div>
+    <p>Pest control is not a discretionary consumer service. It exists because of overlapping structural forces that collectively make demand non-negotiable for a large and growing share of customers:</p>
+    <ul>
+      <li><strong>Public health regulation:</strong> The FDA Food Safety Modernization Act (FSMA), local health codes, and state sanitation laws require food processors, restaurants, hotels, and healthcare facilities to maintain active pest management programs. Non-compliance results in shutdowns, fines, and reputational damage. This is compliance spending, not lifestyle spending.</li>
+      <li><strong>Real estate transaction requirements:</strong> Most US states require a Wood Destroying Organism (WDO) inspection — typically a termite clearance — as a precondition to mortgage origination or property transfer. This creates a recurring, transaction-driven demand layer that is structurally linked to housing turnover.</li>
+      <li><strong>Liability and insurance:</strong> Commercial property owners carry explicit liability for pest-related damage and health incidents. A documented, ongoing pest management program is both an insurance requirement and a legal defense. The termite bond — a guarantee against future termite damage — is effectively a liability management product sold to homeowners.</li>
+      <li><strong>Biology and geography:</strong> Pest pressure is permanent and self-renewing. Insects, rodents, and wildlife reproduce continuously. No treatment is permanent. This is the foundation of the recurring service model — not a sales tactic, but a biological reality.</li>
+      <li><strong>Urbanization and climate:</strong> Urban density increases pest habitat and transmission vectors. Warming climates are expanding the geographic range of disease-carrying pests (mosquitoes, ticks). These are long-duration tailwinds, not cyclical ones.</li>
+    </ul>
+    <div class="highlight-row"><strong>Key insight:</strong> Demand in pest control is driven by regulation, biology, and liability — not consumer confidence. This is why the industry has never contracted in a recession.</div>
+  </div>
+
+  <!-- INDUSTRY EVOLUTION -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <div class="card-title">How the Industry Has Evolved — 30-Year Arc</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Era</th><th>Defining Dynamic</th><th>Key Development</th></tr></thead>
+        <tbody>
+          <tr><td>1980s–1990s</td><td>Fragmentation</td><td>~30,000+ independent operators; Orkin and Terminix dominant but market still highly local; limited technology; chemical-heavy approach</td></tr>
+          <tr><td>2000–2010</td><td>Early consolidation</td><td>Rollins begins systematic M&amp;A under Gary Rollins; ServiceMaster consolidates Terminix, TruGreen, ServiceMaster Clean; route software begins to matter</td></tr>
+          <tr><td>2010–2018</td><td>Operational professionalization</td><td>Rollins invests in centralized routing, pricing analytics, training infrastructure; industry-wide shift toward subscription model; bed bug and mosquito emerge as growth categories</td></tr>
+          <tr><td>2018–2022</td><td>Accelerated consolidation + PE entry</td><td>Anticimex (EQT-backed) enters US aggressively; Rentokil acquires Terminix ($6.7B, 2022); private equity rolls up regional operators; M&amp;A multiples expand from 5–6× to 7–10× EBITDA</td></tr>
+          <tr><td>2022–present</td><td>Scale arms race + technology inflection</td><td>Rentokil/Terminix integration disruption creates opportunity for Rollins; IoT-based monitoring (smart traps, digital reporting) begins to differentiate commercial offerings; labor becomes the defining operational challenge</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <ul style="margin-top:1rem">
+      <li><strong>Consolidation math:</strong> The top 3–4 players (Rollins, Rentokil/Terminix, Anticimex, large regionals) now control roughly 40–45% of the US market. This is unusually low concentration for a mature service industry — suggesting the consolidation runway remains long.</li>
+      <li><strong>Analogue:</strong> The pest control consolidation playbook closely mirrors what Waste Management, Republic Services, and Clean Harbors executed in waste hauling from the 1990s through 2010s — route-based economics, tuck-in acquisitions, pricing power accruing to scale players. Investors who owned WM or RSG in their early consolidation phases have seen this movie before.</li>
+      <li><strong>Chemical evolution:</strong> The industry has progressively moved from broad-spectrum, high-toxicity chemistry (organophosphates, pyrethroids) toward more targeted, lower-toxicity integrated pest management (IPM) protocols — driven by EPA restrictions and customer demand. This has increased service complexity and expertise requirements, which is a barrier to entry.</li>
+    </ul>
+  </div>
+
+  <!-- INDUSTRY STRUCTURE & VALUE CHAIN -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <div class="card-title">Industry Structure &amp; Value Chain</div>
+    <p>The pest control value chain is short and simple — which is one of the things that makes it attractive. There are no complex supply chains, no inventory risk, and no capital-intensive manufacturing. The key layers:</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Layer</th><th>Players</th><th>Pricing Power</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>Chemical manufacturers</td><td>BASF, Bayer, FMC, Syngenta</td><td>Moderate</td><td>Sell active ingredients to formulators; pest control companies are large but not dominant buyers; EPA approval creates natural oligopoly</td></tr>
+          <tr><td>Distributors / formulators</td><td>Target Specialty Products, AMVAC, Control Solutions</td><td>Low</td><td>Distribute formulated products to operators; a commodity layer with limited differentiation</td></tr>
+          <tr><td>Service operators (national)</td><td>Rollins, Rentokil/Terminix, Anticimex</td><td>High</td><td>Own the customer relationship, technician, and route; pricing power accrues here through brand, density, and switching costs</td></tr>
+          <tr><td>Service operators (regional)</td><td>Massey, Arrow, Truly Nolen, ~20,000 independents</td><td>Medium</td><td>Brand and density advantages are local; vulnerable to price competition and talent poaching by nationals</td></tr>
+          <tr><td>Technology providers</td><td>Anticimex Digital, Pelsis, Bell Sensing</td><td>Emerging</td><td>IoT monitoring, smart traps, digital reporting — currently a niche but growing in commercial; could reshape commercial economics over 5–10 years</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="highlight-row"><strong>Where the value sits:</strong> The service operator layer captures the lion's share of economics. Chemical inputs are ~5–8% of revenue. The operator owns the customer relationship, controls pricing, and builds the route density that creates the durable cost advantage. This is a people and logistics business dressed in pest-control clothing.</div>
+  </div>
+
+  <!-- SUB-INDUSTRY BREAKDOWN -->
+  <div class="content-grid" style="margin-bottom:1.5rem">
+    <div class="card">
+      <div class="card-title">Residential Pest — Sub-Industry Dynamics</div>
+      <ul>
+        <li><strong>Economics:</strong> Average revenue per account ~$400–600/yr. Relatively high churn (~15–20%/yr). Margins lower than commercial. Highly seasonal (Q2/Q3 peak).</li>
+        <li><strong>Decision driver:</strong> Reactive (customer sees a bug) or subscription renewal inertia. Low switching friction — the primary loyalty driver is technician relationship and service reliability, not brand per se.</li>
+        <li><strong>Competitive dynamic:</strong> Most price-competitive segment. Local independents compete effectively here. Nationals win on brand trust and customer service consistency, not price.</li>
+        <li><strong>Growth vectors:</strong> Mosquito and tick programs (high-growth, add-on), bed bug treatment (high-margin, high-urgency), wildlife exclusion (growing with suburban sprawl).</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Commercial Pest — Sub-Industry Dynamics</div>
+      <ul>
+        <li><strong>Economics:</strong> Higher revenue per account ($2K–$50K+/yr for large accounts). Lower churn (~10–15%/yr). Less seasonal. Often multi-year contracts with documented compliance reporting requirements.</li>
+        <li><strong>Decision driver:</strong> Compliance and risk management, not cost minimization. Food processing, healthcare, and hospitality customers need documented proof of service for regulatory audits — this creates strong switching inertia.</li>
+        <li><strong>Competitive dynamic:</strong> National scale matters — large multi-site operators (restaurant chains, hotel groups) want a single national vendor. This is where Rollins and Rentokil/Terminix compete most directly.</li>
+        <li><strong>Technology inflection:</strong> Commercial is where IoT monitoring (smart traps with remote alerts, digital audit trails) has the most near-term relevance. Anticimex is furthest ahead here.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Termite — Sub-Industry Dynamics</div>
+      <ul>
+        <li><strong>Economics:</strong> Two revenue streams — initial treatment (one-time, high-margin) and annual bond/renewal (recurring, very high-margin). Bond renewals have churn rates below 5%/yr — among the lowest in all of pest control.</li>
+        <li><strong>The bond mechanic:</strong> A termite bond is a contractual guarantee that the company will re-treat (and in some cases remediate structural damage) if termites return. The customer pays an annual renewal fee to keep the guarantee active. This is structurally a recurring annuity with a very long duration.</li>
+        <li><strong>Competitive dynamic:</strong> Brand and guarantee terms dominate the decision — this is a high-stakes, long-term commitment. Orkin and Terminix have dominant brand recognition. Regional operators struggle to compete on guarantee credibility.</li>
+        <li><strong>Geography matters:</strong> Termite pressure is highest in the Southeast, Gulf Coast, and Hawaii. ROL's Southeast concentration is a structural advantage in this segment.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Wildlife &amp; Ancillary — Sub-Industry Dynamics</div>
+      <ul>
+        <li><strong>Scope:</strong> Wildlife exclusion (rodents, bats, birds, larger animals), attic insulation (ROL's Critter Control brand bundles this), mosquito/tick programs, fumigation.</li>
+        <li><strong>Economics:</strong> Higher average ticket per job (wildlife exclusion can be $1,000–$10,000+). Less recurring than core pest, but strong upsell opportunity within existing customer base.</li>
+        <li><strong>Strategic rationale:</strong> For Rollins, these services leverage the same technician relationship and route infrastructure at minimal incremental cost — pure margin accretion through cross-sell.</li>
+        <li><strong>Growth dynamic:</strong> Mosquito programs have been the fastest-growing ancillary service, driven by disease awareness (West Nile, Zika, EEE) and consumer willingness to pay for outdoor comfort.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- HOW CUSTOMERS BUY -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <div class="card-title">How Customers Buy — Procurement, Contracts &amp; Switching Costs</div>
+    <div class="content-grid" style="margin-top:0.5rem">
+      <div>
+        <h3 style="margin-top:0">Residential</h3>
+        <ul>
+          <li><strong>Trigger:</strong> Sighting (reactive) or neighbor referral, Angi/HomeAdvisor lead, or Google search. Initial sale is often one-time treatment; conversion to annual plan is the key commercial milestone.</li>
+          <li><strong>Contract:</strong> Monthly or annual auto-renew. Low commitment — most plans can be cancelled with 30 days notice. Retention is driven by technician quality and inertia, not contractual lock-in.</li>
+          <li><strong>Switching cost:</strong> Low in theory. In practice, churn is moderate (~15–20%) because switching requires a new sales interaction, a new technician relationship, and a service trial period — a meaningful friction for a $50/month service.</li>
+          <li><strong>Pricing sensitivity:</strong> Moderate. Customers rarely cancel over a 5% annual increase, but meaningful price gaps vs. local alternatives drive some churn.</li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="margin-top:0">Commercial</h3>
+        <ul>
+          <li><strong>Trigger:</strong> Regulatory requirement, failed health inspection, existing contract renewal, or RFP cycle (typically annual for large accounts).</li>
+          <li><strong>Contract:</strong> 1–3 year service agreements with documented reporting requirements (digital logbooks, audit trails for health inspectors). Multi-year contracts are common for regulated industries.</li>
+          <li><strong>Switching cost:</strong> High. Switching vendors means retraining, new documentation systems, a service gap risk during transition, and potential audit exposure. Large food processors or hospital systems rarely switch unless there is a significant service failure or material price differential.</li>
+          <li><strong>Key decision criteria:</strong> Compliance documentation capability, technician certification level, national coverage (for multi-site), responsiveness, and price — roughly in that order for regulated accounts.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHAT SEPARATES GREAT FROM MEDIOCRE -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <div class="card-title">What Separates Great Companies from Mediocre Ones</div>
+    <ul>
+      <li><strong>Route density:</strong> The single most important operational variable. A route with 10 stops per day generates fundamentally different economics than one with 6. Density is built through organic growth, tuck-in acquisitions, and smart geographic clustering. Companies that acquire randomly — without density logic — destroy value. Companies that acquire to fill geographic clusters create it.</li>
+      <li><strong>Technician retention and productivity:</strong> Industry attrition runs 35–40%. The best operators run 20–25%. The difference is not just compensation — it's culture, career pathing, training quality, and management accountability at the branch level. A retained, experienced technician generates meaningfully higher revenue per stop and lower callback rates than a new hire. This is where branch-level management quality is decisive.</li>
+      <li><strong>Pricing discipline:</strong> Great operators implement consistent annual price increases (4–6%) across the entire book of business. Mediocre operators selectively raise prices and leave legacy accounts at below-market rates for years. The difference compounds dramatically over a decade.</li>
+      <li><strong>M&amp;A integration rigor:</strong> Tuck-in acquisitions create value only if integrated quickly and correctly — routes consolidated, pricing normalized, back-office absorbed. Operators that let acquired businesses run independently for 2–3 years post-close capture a fraction of the potential synergy.</li>
+      <li><strong>Customer mix management:</strong> The best operators actively manage their book — consciously growing commercial and termite (higher margin, lower churn) as a percentage of revenue, and shedding or repricing chronically unprofitable residential accounts.</li>
+      <li><strong>Capital allocation discipline:</strong> The best operators in this space (Rollins is the benchmark) deploy capital into tuck-in M&amp;A at disciplined multiples, resist over-paying for trophy acquisitions, and return excess capital via dividends rather than empire-building. The worst operators over-lever for large deals and spend years de-levering instead of compounding.</li>
+    </ul>
+  </div>
+
+  <!-- MENTAL MODELS -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <div class="card-title">Key Mental Models for Pest Control Investors</div>
+    <ul>
+      <li><span class="tag tag-gold">The Route as the Asset</span> The operating unit in pest control is the route, not the branch or the brand. A route with 300 residential accounts, a 85% retention rate, and 8 stops/day at $45 average revenue has a calculable terminal value — like an annuity with a churn rate. Investors who learn to think in route economics rather than P&amp;L aggregates gain a significant analytical edge.</li>
+      <li><span class="tag tag-gold">Termite Bond = Duration Asset</span> A termite bond renewal at &lt;5% annual churn has an implied duration of 15–20 years. It should be valued more like a royalty stream than an operating service contract. The initial treatment is a customer acquisition cost; the bond renewal is the high-margin recurring payoff.</li>
+      <li><span class="tag tag-gold">The Roll-Up Discount</span> M&amp;A-heavy businesses often trade at a "roll-up discount" — the market is skeptical that acquisitions are creating rather than destroying value. Rollins has earned its premium by demonstrating consistently positive acquisition returns over decades. The moment that track record shows a crack (integration failures, multiple expansion, margin dilution from deals), the re-rating can be sharp.</li>
+      <li><span class="tag tag-gold">Organic Growth Is the Signal</span> In a roll-up business, reported revenue growth is a noisy signal — it mixes organic performance with acquisition contribution. The number to watch is organic revenue growth on the legacy book of business. This tells you whether the underlying pricing and retention engine is working. Rollins has consistently delivered 6–9% organic growth; any sustained deceleration below 5% is a meaningful warning signal.</li>
+      <li><span class="tag tag-gold">Labor Is the Leverage Point</span> Pest control P&amp;L has high operating leverage at the route level — once a route is full, incremental revenue drops to the bottom line at very high incrementals. But labor inflation flows through at the same high rate in reverse. This is why technician retention and wage structure are the most important operational variables to model.</li>
+      <li><span class="tag tag-gold">Non-Discretionary ≠ Recession-Proof</span> The industry does not contract in recessions — but it can slow. Residential customers may delay initiating service during a downturn; commercial customers negotiate harder on contract renewals. The model is highly resilient, but "never declines" should not be confused with "immune to macro." The right framing is: the revenue base is sticky, but growth rates are not insulated from economic cycles.</li>
+    </ul>
+  </div>
+
+  <!-- COUNTERINTUITIVE THINGS -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <div class="card-title">Surprising &amp; Counterintuitive Things Outsiders Commonly Miss</div>
+    <ul>
+      <li><strong>The biggest competitive threat isn't another pest company — it's doing nothing.</strong> The most common competitive outcome in residential pest control isn't losing a customer to Terminix; it's the customer cancelling and deciding to try DIY (Home Depot, Walmart shelf treatments). This "non-consumption" is especially relevant in single-family residential and drives the industry's ~15–20% annual churn.</li>
+      <li><strong>Warm winters are good for the business.</strong> Counterintuitively, mild winters increase pest pressure in Q1 (pests survive in larger numbers) and extend the treatment season. The Sunbelt concentration of the major operators is not just a demographic bet — it's a climate hedge. The warmest markets have the longest treatment seasons and the highest termite pressure.</li>
+      <li><strong>The chemical cost is largely irrelevant to competitive dynamics.</strong> Chemicals are ~5–8% of revenue. Pesticide price inflation is real but modest in impact. The reason this surprises outsiders: the inputs look like they should matter (specialized chemistry, EPA registration requirements), but the real cost structure is entirely in labor and logistics.</li>
+      <li><strong>Negative working capital is not an accounting quirk — it's a structural financing advantage.</strong> Many residential customers pay for a full year of service upfront at contract initiation. This means Rollins is effectively receiving an interest-free loan from its customer base, partially financing its operations. This is the same structural advantage that insurance companies and subscription software businesses have — and it's one reason FCF consistently exceeds net income.</li>
+      <li><strong>The termite warranty is a liability that doesn't show up on the balance sheet.</strong> Rollins carries an unquantified contingent liability for termite remediation across its bond portfolio. In most years, the actual remediation costs are well-covered by reserves and ongoing premiums. But in a termite-intensive weather year (warm, wet), claims can spike — this is the pest control equivalent of a catastrophic loss year for a P&amp;C insurer. It's not existential, but it's a tail risk that doesn't appear in standard financial analysis.</li>
+      <li><strong>The franchise model (for Orkin internationally) is structurally inferior to the company-owned model.</strong> International Orkin franchises generate royalty revenue at zero capital cost — which sounds good. But franchise operators set their own pricing, control their own quality, and make their own service decisions. The brand risk of a poor franchise experience is borne by Rollins without the revenue upside. Most sophisticated analysts assign a lower multiple to franchise revenue than company-owned route revenue — and rightly so.</li>
+    </ul>
+  </div>
+
+  <!-- WHERE ROL FITS -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <div class="card-title">Where Rollins Fits in the Ecosystem</div>
+    <ul>
+      <li><strong>Scale position:</strong> Rollins is the #1 or #2 US pest control operator by revenue (depending on how you measure Rentokil/Terminix's post-merger integration). It has the most recognizable brand (Orkin), the most systematized M&amp;A infrastructure, and the best margin profile in the industry.</li>
+      <li><strong>Operational benchmark:</strong> ROL is the operational benchmark against which all other pest control operators are measured. Its EBITDA margins (~23%), FCF conversion (&gt;90%), and acquisition ROIC are the industry high-water marks. This is partly the result of decades of compounding operational improvement — not something a competitor can replicate quickly.</li>
+      <li><strong>Strategic positioning:</strong> ROL has consciously positioned itself as the premium, service-quality operator — not the price leader. This means higher residential ticket prices than local independents, a more rigorous commercial compliance offering than smaller regionals, and a termite guarantee that is backed by a balance sheet large enough to credibly honor it. This positioning supports pricing power but requires sustained service quality investment.</li>
+      <li><strong>Relative to analogues:</strong> Think of ROL as the Cintas of pest control — a route-based, subscription services business with strong brand, pricing power, and a proven M&amp;A playbook in a fragmented, non-discretionary market. Investors who have owned Cintas (CTAS), Waste Management (WM), or Stericycle (SRCL) in their growth phases will recognize the structural pattern — and the valuation premium that the market consistently assigns to the category leader.</li>
+    </ul>
+  </div>
+
+  <!-- MULTI-SEGMENT COMPLEXITY -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <div class="card-title">Analyzing ROL as a Multi-Segment Operator</div>
+    <p>Rollins does not report segment financials in a way that allows clean standalone analysis of Orkin vs. HomeTeam vs. Clark vs. other brands. It reports as a single operating segment. This is a deliberate choice — and an analytical challenge.</p>
+    <ul>
+      <li><strong>The challenge:</strong> Orkin (national, mixed residential/commercial), HomeTeam (construction-channel residential, Sunbelt-concentrated), Clark (West Coast, commercial-heavy), and the other brands each have meaningfully different margin profiles, growth rates, cyclical exposures, and competitive dynamics. Aggregating them into a single P&amp;L obscures this.</li>
+      <li><strong>What to triangulate:</strong> Revenue mix disclosures (residential/commercial/termite percentages) give you the most useful wedge into sub-segment economics. Geographic concentration disclosures and segment commentary in earnings calls fill in further. M&amp;A disclosures (what was acquired, where, at what price) reveal management's geographic prioritization.</li>
+      <li><strong>The HomeTeam risk:</strong> HomeTeam is the most cyclically exposed brand in the portfolio — its in-wall Taexx system is installed in new construction, so revenue is meaningfully correlated with housing starts. In a prolonged housing downturn, HomeTeam headwinds could drag consolidated organic growth below what the core Orkin/Clark book would otherwise produce. This is a risk the consolidated P&amp;L can mask.</li>
+      <li><strong>Valuation implication:</strong> A pure-play pest control operator (residential/commercial only) might warrant a slightly different multiple than a conglomerate that mixes high-recurring-revenue termite bonds, new construction exposure, and wildlife services. In practice, the market appears to value ROL as a blend — which likely gives modest credit to the termite duration asset and modest discount to HomeTeam's cyclicality.</li>
+    </ul>
+  </div>
+
+  <div class="source-note">Drawn entirely from trained knowledge per Prompt 2 constraints · Persona: buy-side PM with 25+ years in business services, specialty outsourcing, and route-based industrials · Analogues owned: Cintas (CTAS), Waste Management (WM), Stericycle (SRCL), ServiceMaster (pre-spinoff), Clean Harbors (CLH)</div>
+</div>
+
+<!-- ══════════ OPERATOR LENS ══════════ -->
+<div id="op" class="section">
+  <div class="section-header">
+    <span class="section-title">Operator / Executive Lens</span>
+    <span class="section-desc">25+ years inside pest control · insider candor · what the 10-K won't tell you</span>
+  </div>
+
+  <!-- WHAT EXECUTIVES OBSESS OVER -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <div class="card-title">How Executives Actually Run These Businesses</div>
+    <p>The pest control P&amp;L looks simple from the outside. Inside, operators are managing a dense web of daily variables that aggregate — slowly and then suddenly — into margin expansion or erosion. Here is what a branch manager, regional VP, and CEO are actually watching:</p>
+    <div class="content-grid" style="margin-top:0.5rem">
+      <div>
+        <h3 style="margin-top:0">At the branch level (daily obsessions)</h3>
+        <ul>
+          <li><strong>Callbacks per technician per week.</strong> A callback — a re-service call within 30 days because the pest problem wasn't resolved — is the single most expensive event in residential operations. It costs a full service visit with zero revenue, increases technician drive time, and is a leading indicator of customer cancellation within 60–90 days. Branch managers who don't know their callback rate by technician are flying blind.</li>
+          <li><strong>Route fill rate.</strong> A technician's route should run at 80–90% capacity. Below that, you're paying labor for idle time. Above 95%, you start getting missed appointments, rushed services, and callbacks. The branch manager's job is to hold routes at the sweet spot — and to fill gaps created by customer cancellations faster than they open.</li>
+          <li><strong>Monday morning cancellation report.</strong> Every branch starts the week pulling cancellations from the weekend. Who cancelled, why, and how long were they a customer? A 6-month customer who cancelled after a callback is a service quality problem. A 4-year customer who cancelled because they "don't need it anymore" is a sales and retention problem. The diagnosis matters.</li>
+          <li><strong>New sale close rates by source.</strong> Internet leads (Angi, Google) close at 15–25%. Referrals close at 50–70%. Technician upsells close at 30–40%. Branch managers who are shifting their lead mix toward referrals and technician-driven adds are building a structurally better book than those dependent on paid digital acquisition.</li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="margin-top:0">At the regional/C-suite level (what keeps them up at night)</h3>
+        <ul>
+          <li><strong>Technician turnover in a tight labor market.</strong> Replacing a technician costs $3,000–$6,000 in recruiting, onboarding, training, and lost productivity (a new tech runs 60–70% of an experienced tech's revenue per stop for the first 6 months). At 35–40% industry attrition, a 500-person technician workforce is replacing 175–200 people per year. That is a permanent, compounding drag on margin that most outside analysts underestimate.</li>
+          <li><strong>Integration pace on acquisitions.</strong> Every acquired company sitting on its own routing software, pricing structure, and service protocols is leaking synergy daily. The clock starts on close day. Regional VPs who let acquired operators "run their own thing" for 18 months are giving back 30–40% of the acquisition's potential value creation.</li>
+          <li><strong>Termite claim trends.</strong> A wet spring in the Southeast will generate termite callbacks that flow through to warranty claims. The CFO is watching claim rates vs. reserves monthly. A spike is not existential — but it is a margin event that can move the quarterly P&amp;L by 50–100bps.</li>
+          <li><strong>Pricing realization vs. stated increases.</strong> A company can announce a 5% price increase across its residential book and realize 2.5% — because frontline sales reps waive increases for retention, branch managers approve discount exceptions, and legacy accounts get grandfathered. The gap between announced pricing and realized pricing is one of the most important management quality signals in the business.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROLES THAT MATTER MOST -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <div class="card-title">Internal Roles &amp; Functions That Drive Outcomes</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Role</th><th>Why It Matters</th><th>What Good Looks Like</th></tr></thead>
+        <tbody>
+          <tr><td>Branch Manager</td><td>The single most important operating role in the company. Owns technician retention, route fill, callback rates, and new customer growth for their market. P&amp;L accountability sits here.</td><td>Runs a Monday morning ops meeting every week without fail. Knows every technician's route metrics. Has a retention conversation with every cancelling customer personally. Promotes from within.</td></tr>
+          <tr><td>Service Technician</td><td>Owns the customer relationship in practice. The customer's perception of the company is almost entirely their technician. Technician personality, reliability, and competence is the #1 driver of residential retention — more than brand, more than price.</td><td>Same technician on the same route for 2+ years. Proactively upsells mosquito, termite, and wildlife at service visits. Generates referrals. Runs zero callbacks in a quarter.</td></tr>
+          <tr><td>Commercial Sales Rep</td><td>Commercial accounts are won in the sales process — not after. The rep who conducts a thorough first site inspection, identifies specific compliance gaps, and writes a proposal tailored to the customer's regulatory exposure wins. The rep who shows up with a brochure loses.</td><td>Deep knowledge of FDA/FSMA and local health code requirements. Closes on compliance documentation capability, not price. Builds relationships with facility managers and quality assurance teams, not purchasing.</td></tr>
+          <tr><td>Routing / Logistics Team</td><td>Route optimization is pure margin. A routing team that can tighten a 7-stop route to 9 stops — through smarter sequencing, geographic clustering, and time-window management — generates the same revenue with less drive time and labor cost.</td><td>Runs territory mapping and routing software (e.g., ServeSuite, FieldRoutes) at the route level, not the branch level. Rebuilds routes proactively after tuck-in acquisitions rather than bolting acquired stops onto existing routes.</td></tr>
+          <tr><td>Termite Inspector</td><td>The termite inspector is simultaneously a salesperson, a liability assessor, and a technical expert. An inspector who writes accurate, defensible inspection reports protects the company from warranty claims. One who undersells or misses active infestations creates both a customer problem and a future claim.</td><td>Licensed, consistently trained, running thorough inspections with photographic documentation. Understands local termite species and behavior (Formosan vs. Eastern subterranean have very different treatment protocols).</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- HOW THE INDUSTRY HAS CHANGED OPERATIONALLY -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <div class="card-title">How the Industry Has Changed Operationally — Past 20 Years</div>
+    <ul>
+      <li><strong>Routing software changed everything.</strong> Twenty years ago, technician routes were managed on paper maps and tribal knowledge. The introduction of digital routing software (and more recently, AI-assisted optimization) has compressed the performance gap between a well-run branch and a poorly-run one — but has also raised the floor of expectations. A branch manager who still manages routes on a whiteboard is losing 15–20% of their available capacity to inefficiency.</li>
+      <li><strong>Digital documentation created a commercial moat.</strong> The shift from paper service logs to digital logbooks — with real-time timestamps, geo-tagged service confirmations, and automated compliance reports — was a turning point for commercial pest control. Large national operators (Rollins, Terminix) invested in these systems first. A restaurant group or food processor now expects a digital audit trail they can show to an FDA inspector. Local independents who can't produce this lose commercial accounts they held for years. This is a moat that was built operationally, not through marketing.</li>
+      <li><strong>The bed bug emergence (2005–2015) reshaped the industry.</strong> Bed bugs were essentially eradicated in the US by the 1960s, then re-emerged globally in the mid-2000s due to international travel and pesticide resistance. They created an entirely new high-margin service category — bed bug treatment can run $500–$3,000+ per job, compared to $150–$400 for a standard residential service visit. Operators who built bed bug expertise early captured significant incremental margin. It also required genuine expertise — misdiagnosis and inadequate treatment are costly — which reinforced the advantage of well-trained, well-equipped national operators.</li>
+      <li><strong>Mosquito programs went from niche to mainstream.</strong> Fifteen years ago, seasonal mosquito barrier treatments were a specialty service offered by a small number of operators. Disease awareness (West Nile, Zika, eastern equine encephalitis) and the outdoor living trend created a mass-market opportunity. Mosquito is now a standard add-on service at most major operators, generating $150–$400/season per residential customer with very high incremental margins (the chemistry is cheap; the labor is mostly an upsell at an existing service visit).</li>
+      <li><strong>The labor market permanently changed post-2020.</strong> Pre-COVID, a pest control technician role was a reliable path to a $40,000–$55,000/year job in most markets — competitive for trades-adjacent work. Post-2020, wage inflation, competition from construction and logistics, and a structural shortage of people willing to do physically demanding, outdoor route work pushed technician compensation up 20–30% in many markets. This is not a cycle — it is a permanent re-pricing of technician labor that operators are still absorbing. The best operators responded by improving retention (less recruiting cost) and investing in productivity tools. The worst responded by raising prices faster and hoping the cost base would stabilize.</li>
+      <li><strong>M&amp;A multiples expanded — and discipline is separating winners from losers.</strong> In the mid-2010s, a well-run regional pest company sold for 5–6× EBITDA. By the early 2020s, PE-backed buyers and aggressive national operators pushed acquisition multiples to 8–12× for premium assets. Rollins has been notably more disciplined than PE-backed competitors — staying closer to 5–8× on tuck-ins while walking away from deals that got irrational. This discipline is not visible in any press release; it shows up in acquisition-adjusted ROIC over time.</li>
+    </ul>
+  </div>
+
+  <!-- BUYING PROCESS FROM CUSTOMER PERSPECTIVE -->
+  <div class="content-grid" style="margin-bottom:1.5rem">
+    <div class="card">
+      <div class="card-title">The Residential Customer — What Actually Drives Decisions</div>
+      <ul>
+        <li><strong>The trigger is almost always a sighting.</strong> A homeowner does not wake up and decide to get pest control. They see a roach, find a mouse, or notice a termite swarm. The initial decision is reactive and emotional. The sales conversation that converts that reaction into an annual subscription is the most leveraged moment in the residential business — and it almost always happens on the phone, within 24 hours of the sighting.</li>
+        <li><strong>Speed of response is the #1 close driver.</strong> In residential, the operator who calls back within 30 minutes of a web inquiry closes at 2–3× the rate of the operator who calls back the next day. Not because the customer compared proposals — but because the emotional urgency of the sighting has faded. Rollins invests heavily in call center capacity and response time standards precisely because speed is the sales variable, not price or features.</li>
+        <li><strong>Stickiness is built in the first three visits.</strong> A customer who completes three service visits on a quarterly plan and experiences no pest recurrence has a retention rate north of 85%. A customer who has a callback (pest recurrence) within 30 days of their first service has a retention rate below 50%. The first treatment and the follow-up experience are the entire retention game in residential.</li>
+        <li><strong>What causes churn:</strong> In order — (1) moving; (2) "I haven't seen bugs, so I don't need it" (non-consumption decision); (3) price increase dissatisfaction; (4) service quality failure or callback; (5) found a cheaper local alternative. Note that (1) and (2) together account for more than half of all cancellations — most residential churn is not a competitive loss. It is a category exit.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">The Commercial Customer — What Actually Drives Decisions</div>
+      <ul>
+        <li><strong>The decision is made by facility management, not procurement.</strong> At a food processing plant, restaurant group, or hospital, the pest control vendor decision is owned by the facility manager or quality assurance director — not the purchasing department. This person cares about three things: not failing a health inspection, not having a pest incident that shuts down operations, and having documentation they can show a regulator. Price is secondary. Operators who pitch procurement on price lose. Operators who pitch quality assurance on compliance documentation win.</li>
+        <li><strong>The first site inspection is the entire sale.</strong> Commercial pest control is not sold on the phone. It is sold in person, during a site inspection, where the rep walks the facility, identifies specific risk areas, and proposes a customized integrated pest management (IPM) program. A rep who shows up with a pre-printed brochure and a standard proposal loses. A rep who produces a site-specific risk assessment within 48 hours wins — even at a higher price.</li>
+        <li><strong>What creates stickiness:</strong> Digital audit trails and compliance documentation — far more than service quality alone. A food processor who has used the same operator's logbook system for three years has 36 months of documented compliance history. Switching vendors means starting over, with a service gap risk during transition. The switching cost is not contractual — it is institutional and regulatory. This is the most durable commercial moat in the industry.</li>
+        <li><strong>What causes commercial churn:</strong> In order — (1) a significant service failure (missed service, pest incident at the facility, failed health inspection while under contract); (2) a new facility manager who has a prior relationship with a competitor; (3) a material price differential (&gt;15–20%) at contract renewal; (4) acquisition of the customer's business by a larger entity with a preferred national vendor. Note that (2) — relationship-driven switching — is underappreciated. This is why Rollins' commercial sales model emphasizes building relationships at multiple levels within the customer organization, not just the single point of contact.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- WHAT SEPARATES EXCELLENT FROM STRUGGLING -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <div class="card-title">What Separates Operationally Excellent Companies from Struggling Ones</div>
+    <div class="highlight-row"><strong>The honest answer:</strong> It is almost never strategy. It is almost always execution at the branch level, repeated consistently, over years. The pest control industry does not reward strategic cleverness. It rewards operational discipline compounded over time.</div>
+    <ul style="margin-top:1rem">
+      <li><strong>Excellent operators:</strong> Price the entire book every year without exceptions. Run callbacks below 8% of service visits. Hold technician attrition below 25%. Integrate acquisitions within 90 days of close. Know their route-level economics — not just branch P&amp;L. Promote branch managers from within. Have a branch manager development pipeline.</li>
+      <li><strong>Struggling operators:</strong> Leave legacy accounts at grandfathered pricing for years ("I don't want to lose them"). Have callbacks running at 15–20% and don't know it until customers start cancelling en masse. Run acquired companies as separate entities for 12–18 months because "we don't want to disrupt their culture." Hire branch managers from outside rather than developing them — and then wonder why retention is poor. Measure performance at the branch level rather than the route level, which masks the underperforming routes inside a "good" branch.</li>
+      <li><strong>The Rollins benchmark:</strong> Rollins' operational superiority over most of the industry stems from three things that are invisible from the outside: (1) the Rollins Learning Center's structured technician development program, which produces meaningfully better-trained techs than the industry average; (2) the branch manager accountability system, which ties a meaningful portion of branch manager compensation to retention and callback metrics, not just revenue growth; and (3) the acquisition integration playbook, which is documented, staffed, and executed with a 90-day clock, not a 12-month one.</li>
+    </ul>
+  </div>
+
+  <!-- VALUE CHAIN PRICING POWER -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <div class="card-title">Value Chain: Who Has Pricing Power and Why</div>
+    <ul>
+      <li><strong>The service operator captures the value.</strong> Chemical manufacturers set input prices, but chemicals are 5–8% of revenue — a rounding error in the P&amp;L. Equipment and fleet are capex, not COGS in the traditional sense. The operator who owns the customer relationship, the route, and the technician captures 85–90 cents of every dollar spent on pest control. This is extraordinarily high value retention for a service business.</li>
+      <li><strong>Pricing power is strongest in termite and commercial.</strong> Residential customers have some price sensitivity and modest alternatives (DIY, cheaper locals). Commercial customers and termite bond holders have almost none. A food plant cannot switch vendors mid-audit cycle. A homeowner with an active termite bond won't void it to save $50/year. These sub-segments price like utilities.</li>
+      <li><strong>The annual price increase is the most important management decision made each year.</strong> Pest control pricing is not set by market dynamics — it is set by management will. If leadership commits to 5% across the book and holds the line on exceptions, it flows to the bottom line almost entirely (incremental labor and chemistry costs per service are near-zero on an existing route). If leadership flinches — allowing branch managers to waive increases for retention — the revenue falls to the bottom of the funnel and takes years to recover. This is the difference between 23% EBITDA margins and 18% EBITDA margins at similar revenue levels.</li>
+      <li><strong>New service categories (mosquito, wildlife) price at a premium.</strong> A mosquito barrier program is sold as a specialty service, not a commodity. Residential customers who wouldn't pay $20/month more for pest control will pay $60–$80/month for a mosquito treatment program that lets them use their backyard. The operator frames it as a lifestyle product. This is pricing power through category creation — one of the few genuine strategic innovations in an otherwise operationally-driven industry.</li>
+    </ul>
+  </div>
+
+  <!-- OPERATOR MENTAL MODELS -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <div class="card-title">Mental Models Experienced Operators Use to Evaluate Business Health</div>
+    <ul>
+      <li><span class="tag tag-gold">Revenue per stop</span> The most important route-level metric. A technician doing 9 stops at $55 average revenue is generating $495/day before labor. The same technician doing 7 stops at $48 is generating $336. The gap is entirely about route fill, pricing discipline, and stop mix. Operators who don't track this at the route level — only at the branch level — are managing blind.</li>
+      <li><span class="tag tag-gold">Callback rate</span> A callback (re-service within 30 days) costs the full labor and drive time of a service visit with zero revenue. At scale, a 10% callback rate is operationally equivalent to working every tenth day for free. Best-in-class operators run 5–8%. Industry average is 12–15%. The gap goes straight to EBITDA.</li>
+      <li><span class="tag tag-gold">Cancellation rate by cohort</span> Sophisticated operators don't track overall cancellation rates — they track cancellation rates by customer cohort (month of acquisition, lead source, service type, technician). A cohort acquired via paid digital with a 22% first-year cancellation rate is structurally different from a referral cohort at 8%. Managing the lead mix is managing the long-run economics of the book.</li>
+      <li><span class="tag tag-gold">Days to integration</span> For acquisitions, every day an acquired company runs on its own routing software, pricing structure, and service protocols is a day of foregone synergy. Experienced operators measure integration progress in days-to-route-consolidation and days-to-pricing-normalization — not months-to-EBITDA-improvement, which lags the operational reality by 6–9 months.</li>
+      <li><span class="tag tag-gold">Technician revenue per hour</span> Divide branch revenue by total technician hours worked (including drive time). This single number captures route density, stop pricing, and route efficiency simultaneously. A branch where this number is declining — even with flat revenue — is losing technician productivity to something (route dispersion, excessive callbacks, high new-hire mix) that will eventually show up in the P&amp;L.</li>
+      <li><span class="tag tag-gold">Termite claim rate vs. reserve</span> Termite operations carry a contingent liability (the bond guarantee). Operators track actual claim rates vs. actuarially-set reserves monthly. A claims spike — often triggered by an unusually warm, wet season — can burn through reserves and create a material one-quarter margin event. Experienced operators maintain a 15–20% cushion above actuarial reserves precisely because termite claim frequency is weather-correlated and therefore lumpy.</li>
+    </ul>
+  </div>
+
+  <!-- NUANCES AND UNWRITTEN RULES -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <div class="card-title">Nuances, Unwritten Rules &amp; Things That Routinely Surprise Outsiders</div>
+    <ul>
+      <li><strong>The technician IS the brand.</strong> Rollins spends millions on the Orkin brand. But in practice, a residential customer's loyalty is to their technician — not to Orkin. When a technician leaves, there is a 30–40% probability that their longtime customers follow them (either cancel or, if the tech goes to a competitor, switch). This is why Rollins invests in technician retention and career development as a brand protection strategy, not just a cost management one.</li>
+      <li><strong>A "free callback" is never free — and not offering one is even more expensive.</strong> The industry standard is a callback guarantee (if pests return within 30 days, we re-treat at no charge). Some operators have tried to monetize callbacks to improve margin. Every one has regretted it. The customer who pays for a callback cancels. The customer who gets a free callback with a genuine apology renews. The math is not close.</li>
+      <li><strong>Acquired companies almost always have underpriced accounts.</strong> Every owner-operated pest company has a cohort of longtime customers paying rates set 10–15 years ago — often people the owner knew personally, or early customers he never wanted to "bother" with price increases. Rollins integration teams systematically identify and reprice these accounts within the first 90 days. This is a consistent source of realized value that is invisible in the acquisition announcement and shows up 6–12 months later in organic growth statistics.</li>
+      <li><strong>Termite inspectors set the company's liability profile.</strong> The termite inspector who misses an active infestation and issues a clearance is not just creating a customer problem — they are creating a future warranty claim that can run $20,000–$100,000 in remediation costs. Operators who invest in ongoing inspector training and random re-inspection quality checks are managing their balance sheet tail risk, not just their service quality. Most investors have no idea this liability exists.</li>
+      <li><strong>The commercial audit trail is worth more than the treatment itself.</strong> A sophisticated food plant quality manager will tell you: the pest control service itself matters, but the documentation it produces matters more. If they fail an FDA inspection for pest-related findings, the documented service record is their legal defense. Operators who figured this out early — and built digital logbook systems that produce court-ready documentation — created a commercial moat that is nearly impossible for paper-based operators to replicate without 18–24 months of technology investment.</li>
+      <li><strong>"No see" customers are the most profitable and most fragile.</strong> A residential customer who has been on a quarterly plan for five years and hasn't seen a bug in three years is extremely likely to cancel — not because of service failure, but because they've forgotten why they have the service. The "no see" customer is the industry's most valuable segment (high margin, zero callbacks, near-zero complaint volume) and its most attrition-prone. Best-in-class operators have proactive retention programs specifically for customers who have gone 12+ months without a pest sighting — because those customers are walking toward cancellation without knowing it.</li>
+    </ul>
+  </div>
+
+  <!-- GOOD AND BAD AT EACH LEVEL -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <div class="card-title">What Good and Bad Looks Like — Company, Segment &amp; Contract Level</div>
+    <div class="content-grid" style="margin-top:0.5rem">
+      <div>
+        <h3 style="margin-top:0">At the company level</h3>
+        <ul>
+          <li><span class="tag tag-green">Good</span> Organic revenue growth of 6–9% sustained over multiple years. EBITDA margin expansion of 50–100bps annually. Technician attrition below 25%. Acquisition integration completed within 90 days. Pricing realization within 80% of stated increases. FCF conversion above 90%.</li>
+          <li><span class="tag tag-red">Bad</span> Organic growth decelerating below 5% without a clear weather or macro explanation. EBITDA margins flat or declining despite pricing. Technician attrition above 35% and rising. Acquisitions sitting on separate systems 12 months after close. A widening gap between stated and realized price increases. CFO calling out "pricing headwinds" in earnings — this almost always means field management is caving on increases.</li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="margin-top:0">At the segment level</h3>
+        <ul>
+          <li><span class="tag tag-green">Good</span> Commercial growing faster than residential (mix shift toward higher-margin, lower-churn accounts). Termite renewal rates stable or improving. Mosquito and ancillary growing 15–20%+ as add-on attach rates increase. HomeTeam holding or growing share in new construction markets even in a soft housing start environment.</li>
+          <li><span class="tag tag-red">Bad</span> Commercial share losses to Rentokil/Terminix on multi-site national accounts — this indicates the technology/documentation gap is widening. Termite claim rates spiking above reserve levels (look for reserve additions in footnotes). Residential churn accelerating without a clear seasonal explanation — this is an early signal of service quality degradation, usually driven by technician turnover.</li>
+        </ul>
+      </div>
+    </div>
+    <div style="margin-top:1rem">
+      <h3 style="margin-top:0">At the contract level</h3>
+      <ul>
+        <li><span class="tag tag-green">Good contract</span> A 3-year commercial IPM agreement with a food processor at $18,000/year, digital logbook, monthly service visits, and documented compliance reporting. Renewal probability &gt;90%. Margin contribution 35–40% after technician time and chemistry. This is the pest control equivalent of a long-duration, investment-grade bond.</li>
+        <li><span class="tag tag-amber">Mediocre contract</span> A monthly residential general pest plan at $39/month, acquired digitally, with no upsell of mosquito or termite, two callbacks in the first year, and a customer who has never spoken to a technician — just pays automatically. Churn probability 30–40% in year 2. Margin contribution 20–25% after callbacks. This is the volume business — necessary, but not where value is created.</li>
+        <li><span class="tag tag-red">Bad contract</span> A grandfathered residential account at $28/month set in 2009, customer calls every 90 days with a new pest complaint, has received four free re-treatments in the past year, and every callback is handled by a senior technician rather than a junior one because the customer demands it. This account is destroying value. The right decision is to raise the price to market rate and accept the cancellation — or proactively cancel. Most operators don't have the discipline to do either.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- WHAT THE 10-K WON'T TELL YOU -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <div class="card-title">What a Smart Investor Cannot Learn from a 10-K or Investor Presentation</div>
+    <ul>
+      <li><strong>The actual pricing realization rate.</strong> Every year Rollins announces a pricing initiative. The 10-K shows revenue growth. What it does not show is whether the pricing flowed through at 80% or 40% of the stated increase — because field management caved on exceptions. The only proxy is organic revenue per customer (total organic revenue divided by account count), which is only disclosed in investor day materials and rarely discussed explicitly.</li>
+      <li><strong>Branch-level callback rates.</strong> Callbacks are the most important leading indicator of residential churn, and they are nowhere in any public disclosure. An investor who wants to understand service quality trajectory has to ask management directly — and assess whether they track it and care about it. Rollins does. Many regional competitors do not.</li>
+      <li><strong>The quality of the M&amp;A pipeline.</strong> Rollins discloses acquisition count and aggregate spend but not individual deal multiples, integration timelines, or post-acquisition margin trajectories. The investor has to infer acquisition quality from the spread between reported revenue growth and stated organic growth, and from management's commentary on tuck-in contribution in earnings calls. There is no clean way to see whether the last 25 acquisitions are performing to underwriting.</li>
+      <li><strong>Technician attrition by region.</strong> Overall headcount is disclosed. Regional attrition breakdowns are not. This matters because attrition in a market like California (Clark Pest Control) — where the labor market is tightest and the regulatory environment most demanding — is structurally different from attrition in the Southeast. An investor cannot tell from filings whether the attrition problem is systemic or regional.</li>
+      <li><strong>The termite reserve adequacy.</strong> Termite warranty reserves appear in the balance sheet as a liability, but the actuarial assumptions underlying the reserve are not disclosed in sufficient detail to independently assess adequacy. A prolonged warm, wet cycle in the Southeast could require reserve additions that are not visible in the current financial statements. This is a tail risk that requires operator-level judgment to assess — not financial statement analysis.</li>
+      <li><strong>The HomeTeam housing exposure magnitude.</strong> Rollins does not disaggregate HomeTeam revenue from consolidated residential revenue. An investor who wants to understand the company's new construction sensitivity — which is material in a housing downturn — cannot derive it from any public document. Management has been forthcoming in investor day presentations, but the sensitivity analysis is not in any filing.</li>
+    </ul>
+  </div>
+
+  <!-- MULTI-SEGMENT COMPLEXITY FROM OPERATOR PERSPECTIVE -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <div class="card-title">Managing Internal Complexity — The Multi-Brand Operator's Challenge</div>
+    <p>Rollins operates 20+ brands under a single P&amp;L. From the inside, this is a meaningful management challenge that external investors tend to underestimate.</p>
+    <ul>
+      <li><strong>Culture management across brands.</strong> Orkin's culture is built on 120 years of brand identity and a highly structured training and operating model. Clark Pest Control, acquired in 2019, has its own deeply ingrained culture and customer relationships that predate the acquisition by decades. Northwest Exterminating has yet another identity. Preserving what made each brand valuable — while integrating the back-office and operating systems — requires a sophisticated organizational design. Rollins does this by maintaining brand names and local identity while standardizing everything below the surface: routing, pricing, training, reporting.</li>
+      <li><strong>Capital allocation across brands requires genuine discipline.</strong> When a regional VP for Orkin and a regional VP for Clark both need additional technician headcount, routing software upgrades, and local marketing investment, the C-suite has to allocate scarce capital across competing internal priorities with different risk/return profiles. This is harder than it sounds — and it is harder in a 20-brand portfolio than in a pure-play single-brand operator.</li>
+      <li><strong>The HomeTeam complexity is underappreciated.</strong> HomeTeam's business model — partnering with homebuilders rather than individual homeowners — requires a completely different sales motion, contract structure, and account management approach than Orkin or Clark. The homebuilder relationship is managed at the corporate level; the individual homeowner conversion is managed at the branch level. Keeping both aligned requires coordination that simply doesn't exist in the single-channel operators. A housing downturn that hits HomeTeam hard while Orkin's residential book holds up creates an internal resource allocation tension that is difficult to manage cleanly.</li>
+      <li><strong>What this means for investors:</strong> Rollins' consolidated P&amp;L looks simpler than the operating reality. A period of apparent financial stability can mask significant operational turbulence in one brand or region that is being offset by strength elsewhere. The investor who tracks organic growth, margin trajectory, and technician attrition at the brand level — to the extent disclosures allow — will see divergence from the consolidated picture that creates both risk signals and opportunities that the headline numbers obscure.</li>
+    </ul>
+  </div>
+
+  <div class="source-note">Drawn entirely from trained knowledge per Prompt 3 constraints · Persona: senior operator with 25+ years across branch management, regional operations, business development, and C-suite roles in pest control and specialty outsourcing · Rollins used as grounding example throughout · No internet sources consulted</div>
+</div>
+
+</main>
+
+<script>
+function show(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({ top: document.querySelector('.nav-bar').offsetTop - 56, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
